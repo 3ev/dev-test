@@ -18,4 +18,9 @@ module.exports = function () {
     // Initialise Bootstrap tooltips
     //http://getbootstrap.com/javascript/#tooltips
     $('[data-toggle="tooltip"]').tooltip()
+
+    // Hide Bootstrap Popover
+    $('.media-object').on('click', function (e) {
+        $('.media-object').not(this).popover('hide');
+    });
 }
