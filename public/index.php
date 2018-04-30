@@ -28,5 +28,13 @@ $data = json_decode($res->getBody(), true);
 //Sort the episodes
 uasort($data,"cmp_episodes");
 
+$seasons = array();
+
+foreach ($data as $datum) {
+    array_push($seasons, $datum['season']);
+}
+
+$seasons = array_unique($seasons);
+
 //Render the template
-echo $twig->render('page.html', ["episodes" => $data]);
+echo $twig->render('page.html', ["episodes" => $data, "seasons" => $seasons]);
