@@ -1,7 +1,9 @@
 .episode {
+    padding-bottom: 20px;
     p {
-        font-family: 'PT Serif', serif;
-        font-size: 15px;
-        line-height: 25px;            
+        font-family: $font-family-serif;
+        font-size: $font-size-small;
+        line-height: $line-height-small;
+        margin-bottom: 0;
     }
 }
