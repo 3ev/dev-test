@@ -1,6 +1,8 @@
 <?php
 require_once '../vendor/autoload.php';
 
+session_start();
+
 //Sorts array based on season and then episode
 function cmp_episodes($a, $b) {
     if ($a["season"] == $b["season"]) {
@@ -16,17 +18,27 @@ function cmp_episodes($a, $b) {
 $loader = new Twig_Loader_Filesystem('../templates/');
 $twig = new Twig_Environment($loader, ['debug' => true]);
 
+$cache = "";
+
 //Get the episodes from the API
 $client = new GuzzleHttp\Client();
 try {
-    $res = $client->request('GET', 'http://3ev.org/dev-test-api/');
+    if (isset($_SESSION["apidata"])) {
+        $data = $_SESSION["apidata"];
+        $cache = "Using cached data";
+    } else {
+        $res = $client->request('GET', 'http://3ev.org/dev-test-api/');
+
+        $data = json_decode($res->getBody(), true);
+
+        $_SESSION["apidata"] = $data;
+    }
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     echo $twig->render( 'error.html');
 }
-$data = json_decode($res->getBody(), true);
 
 //Sort the episodes
 uasort($data,"cmp_episodes");
 
 //Render the template
-echo $twig->render('page.html', ["episodes" => $data]);
+echo $twig->render('page.html', ["episodes" => $data, "cache" => $cache]);
