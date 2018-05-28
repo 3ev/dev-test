@@ -5,13 +5,7 @@ require_once '../vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem('../templates/');
 $twig = new Twig_Environment($loader, ['debug' => true]);
 
-//Get the episodes from the API
-$client = new GuzzleHttp\Client();
-$res = $client->request('GET', 'http://3ev.org/dev-test-api/');
-$data = json_decode($res->getBody(), true);
-
-//Sort the episodes
-array_multisort(array_keys($data), SORT_ASC, SORT_STRING, $data);
+$page_data = EpisodeLoader::create()->run();
 
 //Render the template
-echo $twig->render('page.html', ["episodes" => $data]);
+echo $twig->render('page.html', $page_data->getData());
