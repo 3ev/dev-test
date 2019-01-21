@@ -7,7 +7,8 @@ require_once "../vendor/autoload.php";
  * @return bool
  */
 function sortEpisodes($payload, $sortBy = null) {
-    return array_multisort(array_keys($payload), SORT_ASC, SORT_STRING, $payload);
+    array_multisort(array_keys($payload), SORT_ASC, SORT_STRING, $payload);
+    return $payload;
 };
 
 /**

@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "watch": "./node_modules/.bin/gulp watch",
     "build": "composer install && npm install && ./node_modules/.bin/gulp",
     "serve": "cd public && php -S localhost:8000"
   },
