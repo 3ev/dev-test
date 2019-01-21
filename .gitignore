@@ -3,3 +3,4 @@ vendor/
 compiled/
 .sass-cache/
 node_modules
+.idea
