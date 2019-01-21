@@ -1,5 +1,9 @@
 {
   "private": true,
+  "scripts": {
+    "build": "composer install && npm install && ./node_modules/.bin/gulp",
+    "serve": "cd public && php -S localhost:8000"
+  },
   "devDependencies": {
     "autoprefixer": "^6.5.1",
     "browserify": "^13.1.0",
