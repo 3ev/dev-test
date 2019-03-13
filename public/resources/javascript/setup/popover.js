@@ -13,7 +13,11 @@ module.exports = function () {
         selector: '[data-toggle="popover"]',
         container: 'body',
         viewport: { selector: 'body', padding: 20 }
-    })
+    }).on("show.bs.popover", function(e){
+        // hide all other popovers
+        $("[rel=popover]").not(e.target).popover("destroy");
+        $(".popover").remove();
+    });
     
     // Initialise Bootstrap tooltips
     //http://getbootstrap.com/javascript/#tooltips
