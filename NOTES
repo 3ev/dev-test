@@ -1,0 +1,4 @@
+Issue 4 : showing an episode popover should hide all other episode popovers
+
+Release notes
+Recompile js with gulp
