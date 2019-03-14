@@ -1,0 +1,32 @@
+CHANGE1 - API response caching
+Test plan
+    Ideally, mock the API to simulate endpoint success and failure responses.
+    http://docs.guzzlephp.org/en/stable/testing.html
+
+    As the API throws GuzzleException often enough, it was quicker to mock scenarios manually.
+    So to start a test repeat: delete local cache, then refresh page until required response received.
+
+    Scenario 1 :
+    Given an empty cache,
+    When I refresh page and API returns a GuzzleException
+    Then I expect to see an error message, and no page in /cache directory
+    (note: the handler does cache something for 301 which I'll ignore for now)
+
+    Scenario 2 : (not tested manually)
+    Given Scenario 1
+    When a second refresh also returns a GuzzleException
+    Then I expect to see an error message, and no page in /cache directory
+
+    Scenario 3 :
+    Given Scenario 1
+    When a second refresh returns a valid response
+    Then I expect to see the episodes, and the page in /cache directory
+
+    Scenario 4 :
+    Given Scenario 3
+    When a further refresh is requested
+    Then check page is returned from /cache
+    To save time, I placed a breakpoint at line 138 in
+        vendor/kevinrob/guzzle-cache-middleware/src/CacheMiddleware.php
+        verified using Xdebug that request fetched from cacheStorage
+
