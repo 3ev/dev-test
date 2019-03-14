@@ -10,12 +10,12 @@ module.exports = function () {
 
     // initialise all popovers
     $('body').popover({
-        selector: '[data-toggle="popover"]',
+        selector: "[data-toggle=popover]",
         container: 'body',
         viewport: { selector: 'body', padding: 20 }
     }).on("show.bs.popover", function(e){
         // hide all other popovers
-        $("[rel=popover]").not(e.target).popover("destroy");
+        $("[data-toggle=popover]").not(e.target).popover("destroy");
         $(".popover").remove();
     });
     
