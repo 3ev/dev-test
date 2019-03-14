@@ -1,0 +1,9 @@
+Issue 2 - show user-friendly messages on Guzzle exceptions
+Release notes : there are unhandled Twig exceptions, raise a separate issue
+
+Test Plan
+Ideally Mock the API to simulate error and success responses.
+Replicate issue without the patch.
+Apply patch.
+Verify view contains desired error message on Guzzle Exception
+Verify view behaviour unchanged on successful API response

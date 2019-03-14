@@ -15,6 +15,11 @@
     </div>
 
     <div class="container">
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error}}
+        </div>
+        {%endif %}
         {% for episode in episodes %}
             {% if loop.index%2 == 1 %}<div class="row">{%endif %}
 
