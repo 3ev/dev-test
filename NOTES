@@ -1,0 +1,10 @@
+change2 Provide a favourite seasons filter
+
+Simple implementation using http query parameter ?series=[ all || number ].
+A form dropdown is offered, listing Bobby's favourite series to select from
+
+Test plan
+Scenario 1: no query params, show all seasons
+Scenario 2: select a favourite from dropdown, show only selected series' episodes
+Scenario 3: select All from dropdown, show all seasons
+Scenario 4: ?series=999, show No matches

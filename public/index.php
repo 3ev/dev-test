@@ -15,5 +15,19 @@ $seasons = array_column($data, 'season');
 $episodes = array_column($data, 'episode');
 array_multisort($seasons, SORT_ASC, $episodes, SORT_ASC, $data);
 
+$season = 'all';
+if (isset($_GET) && isset($_GET['season'])) {
+    $season = $_GET['season'];
+}
+if ($season != 'all') {
+    $data = array_filter($data, function ($row) use ($season) {
+        return ($row['season'] == $season);
+    });
+}
+
 //Render the template
-echo $twig->render('page.html', ["episodes" => $data]);
+echo $twig->render('page.html', [
+    "season" => $season,
+    "episodes" => $data,
+    "favouriteSeasons" => array_unique($seasons)
+]);

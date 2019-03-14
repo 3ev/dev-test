@@ -7,33 +7,57 @@
     <link href="/resources/compiled/css/main.css" rel="stylesheet">
     <head>
 <body>
-    <div class="jumbotron header">
-      <div class="container-fluid text-center">
+<div class="jumbotron header">
+    <div class="container-fluid text-center">
         <h1>Bobby's favourite episodes of <i>The Simpsons</i></h1>
         <p><img class="img-circle" src="resources/img/bobby.jpg"></p>
-      </div>
     </div>
 
-    <div class="container">
-        {% for episode in episodes %}
-            {% if loop.index%2 == 1 %}<div class="row">{%endif %}
+</div>
 
-                {{ include('episode.html') }}
-        
-            {% if loop.index%2 == 0 %}</div>{%endif %}
-        {% endfor %}
+<div class="container">
+
+    <form method="GET">
+        <label>Favourite Seasons: </label>
+        <select name="season" onchange="this.form.submit()">
+            <option value="all">all</option>
+            {% for favouriteSeason in favouriteSeasons %}
+            <option value="{{ favouriteSeason }}"
+                    {% if (season==favouriteSeason) %}selected="selected" {% endif %}
+            >
+                Season {{ favouriteSeason }}
+            </option>
+            {% endfor %}
+        </select>
+    </form>
+
+    {% for episode in episodes %}
+    {% if loop.index%2 == 1 %}
+    <div class="row">{%endif %}
+
+        {{ include('episode.html') }}
+
+        {% if loop.index%2 == 0 %}
     </div>
+    {%endif %}
+    {% endfor %}
 
-    <footer class="footer">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="text-center">
+    {% if episodes|length==0 %}
+    No matches
+    {%endif %}
+
+</div>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="text-center">
                 <p class="text-muted"><3</p>
             </div>
         </div>
-      </div>
-    </footer>
+    </div>
+</footer>
 
-  <script type="text/javascript" src="/resources/compiled/js/main.js"></script>
+<script type="text/javascript" src="/resources/compiled/js/main.js"></script>
 </body>
 </html>
