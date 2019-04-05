@@ -16,6 +16,6 @@ $episode = array_column($data, 'episode');
 
 //Sort the data multi-array accroding to season and episode in ascending order respectively
 array_multisort($season, SORT_ASC, $episode, SORT_ASC, $data);
-
+ 
 //Render the template
 echo $twig->render('page.html', ["episodes" => $data]);
