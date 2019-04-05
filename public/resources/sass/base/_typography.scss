@@ -4,8 +4,11 @@
 
 h4 {
     color: $gray-dark;
+    font-family: $font-family-sans-serif;
+    font-weight: 'bold';
+    font-size: $font-size-h4;
 
     small {
-        color: $gray-light;
+        color: $gray-dark;
     }
 }

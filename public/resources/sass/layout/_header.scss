@@ -1,5 +1,5 @@
 .header {
-    background: url(/resources/img/triangle.png);
+    background: url(../../img/triangle.png); 
     background-size: cover;
 
     h1 {
@@ -7,4 +7,6 @@
         font-size: $font-size-h1;
         color: $gray-dark;
     }
+
+    
 }
