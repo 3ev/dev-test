@@ -7,7 +7,13 @@ $twig = new Twig_Environment($loader, ['debug' => true]);
 
 //Get the episodes from the API
 $client = new GuzzleHttp\Client();
-$res = $client->request('GET', 'http://3ev.org/dev-test-api/');
+try {
+    $res = $client->request('GET', 'http://3ev.org/dev-test-api/');
+} catch(\GuzzleHttp\Exception\GuzzleException $ex) {
+    echo $twig->render('error.html');
+    exit;
+}
+
 $data = json_decode($res->getBody(), true);
 
 //Sort the episodes
